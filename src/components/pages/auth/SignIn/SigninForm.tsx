@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -35,6 +35,7 @@ const SignInSchema = z.object({
 type TSignInSchema = z.infer<typeof SignInSchema>;
 
 function SigninForm() {
+  const [isLoading, setIsLoading] = useState(false)
   const { authWithNextAuth } = useAuth();
   const router = useRouter();
 
@@ -50,7 +51,9 @@ function SigninForm() {
 
   async function onSubmit(data: TSignInSchema) {
     try {
+      setIsLoading(true);
       await authWithNextAuth(data);
+      setIsLoading(false);
     } catch (error) {
       console.log("error on signIn onSubmit", error);
       const { message } = error as Error;
@@ -65,6 +68,7 @@ function SigninForm() {
           route: "/sign-in",
         });
       }
+      setIsLoading(false);
     }
   }
 
@@ -89,10 +93,11 @@ function SigninForm() {
 
         <div className="flex flex-col gap-4 w-full">
           <Button
+            type="submit"
             variant="outline"
             className="w-full"
-            type="submit"
             form="signin-form"
+            disabled={isLoading}
           >
             Entrar na Conta
           </Button>
@@ -106,6 +111,7 @@ function SigninForm() {
           <Button
             type="button"
             variant="outline"
+            disabled={isLoading}
             className="w-full flex gap-2 items-center"
             onClick={() => alert("Função não implementada")}
           >
@@ -125,6 +131,7 @@ function SigninForm() {
 
           <Button
             variant="default"
+            disabled={isLoading}
             className="w-full"
             type="button"
             asChild
