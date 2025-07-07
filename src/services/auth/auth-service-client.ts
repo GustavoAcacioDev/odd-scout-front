@@ -13,3 +13,14 @@ export async function loginUserClient(data: TLoginUserBody) {
 
   return res;
 }
+
+export async function registerUserClient(data: TLoginUserBody) {
+  const fetch = fetchAnonClient();
+
+  const res = await fetch.post<TLoginUserBody, ApiResponse<TLoginUserResponse>>(
+    "/auth/signup",
+    data
+  );
+
+  return res;
+}

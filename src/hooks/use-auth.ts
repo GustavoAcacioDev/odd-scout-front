@@ -13,8 +13,6 @@ export default function useAuth() {
       redirect: false,
     })
 
-    console.log(res)
-
     if (res?.ok) {
       console.log('sign in response', res)
       return router.push('/dashboard')

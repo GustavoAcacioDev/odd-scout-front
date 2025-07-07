@@ -116,6 +116,21 @@ function SigninForm() {
             />{" "}
             Continuar com Google
           </Button>
+
+          <div className="w-full flex items-center gap-4">
+            <Separator className="shrink" />
+            <span className="w-full text-center text-sm font-semibold text-gray-600 text-nowrap">Ainda não tem uma conta?</span>
+            <Separator className="shrink" />
+          </div>
+
+          <Button
+            variant="default"
+            className="w-full"
+            type="button"
+            asChild
+          >
+            <Link href="/sign-up">Cadastre-se Agora</Link>
+          </Button>
         </div>
 
         <span className="w-full inline-block text-center text-xs font-semibold text-gray-400">
