@@ -38,7 +38,6 @@ export default withAuth(
             return NextResponse.redirect(signInUrl)
         }
 
-        // Permitir acesso para todos os outros casos
         return NextResponse.next()
     },
     {
