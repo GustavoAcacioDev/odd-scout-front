@@ -15,7 +15,7 @@ const buttonVariants = cva(
         'action-blue':
           'bg-blue text-white text-sm leading-sm font-bold hover:bg-blue-hover hover:outline hover:outline-gray-800 hover:outline-1 ',
         'action-negative':
-          'bg-negativePure text-white text-sm leading-sm font-bold hover:bg-negativePure-800 hover:outline hover:outline-gray-800 hover:outline-1 ',
+          'bg-negative-pure text-white text-sm leading-sm font-bold hover:bg-negative-pure-800 hover:outline hover:outline-gray-800 hover:outline-1 ',
         destructive:
           'bg-red-500 text-slate-50 hover:bg-red-500/90 dark:bg-red-900 dark:text-slate-50 dark:hover:bg-red-900/90',
         outline:
@@ -23,7 +23,7 @@ const buttonVariants = cva(
         outlineBlue:
           'border-2 border-blue bg-white text-blue hover:ease-in-out hover:duration-300 hover:bg-blue hover:bg-opacity-10 hover:text-blue',
         'outline-red':
-          'border-2 border-negativePure bg-white text-negativePure hover:ease-in-out hover:duration-300 hover:bg-negativePure/10',
+          'border-2 border-negative-pure bg-white text-negative-pure hover:ease-in-out hover:duration-300 hover:bg-negative-pure/10',
         'outline-green':
           'border-2 border-chatmax-green bg-white text-chatmax-green hover:ease-in-out hover:duration-300 hover:bg-chatmax-green/20',
         lightBlue: 'bg-blue/10 text-blue hover:bg-blue hover:text-white',
@@ -46,9 +46,9 @@ const buttonVariants = cva(
           'bg-neutral-orange text-white font-bold text-sm leading-sm hover:bg-neutral-orange/80',
       },
       size: {
-        default: 'h-12 min-h-10 md:h-[48px] rounded-full px-7',
-        sm: 'px-8 h-[40px] min-h-10 rounded-full',
-        md: 'px-8 h-[48px] min-h-10 rounded-full',
+        default: 'h-12 min-h-10 md:h-[48px] rounded-md px-7',
+        sm: 'px-8 h-[40px] min-h-10 rounded-md',
+        md: 'px-8 h-[48px] min-h-10 rounded-md',
         '2x1': 'leading-[18px] text-[18px] py-[10px] px-8 rounded-2xl ',
         full: 'w-full h-[48px] rounded-full text-gray-800 font-bold max-h-[56px] text-lg leading-lg',
       },
@@ -62,7 +62,7 @@ const buttonVariants = cva(
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+  VariantProps<typeof buttonVariants> {
   asChild?: boolean
 }
 

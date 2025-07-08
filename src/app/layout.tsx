@@ -4,8 +4,9 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { twMerge } from 'tailwind-merge'
 
+import Providers from '@/components/Providers'
 import ResponseDialog from '@/components/ui/dialogs/ResponseDialog'
-import { ResponseDialogProvider } from '@/contexts/ResponseDialogContext'
+import { Toaster } from '@/components/ui/shadcn/toaster'
 
 const roboto = Inter({
   variable: '--font-inter',
@@ -25,10 +26,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={twMerge('antialiased', roboto.variable)}>
-        <ResponseDialogProvider>
+        <Providers>
           {children}
+
+          <Toaster />
           <ResponseDialog />
-        </ResponseDialogProvider>
+        </Providers>
       </body>
     </html>
   )

@@ -48,7 +48,7 @@ export default function AlertDialogContent({
           className={twMerge(
             'text-xl leading-6 font-bold',
             type === 'success' && 'text-gray-800',
-            type === 'fail' && 'text-negativePure',
+            type === 'fail' && 'text-negative-pure',
             type === 'warning' && 'text-gray-800',
           )}
         >

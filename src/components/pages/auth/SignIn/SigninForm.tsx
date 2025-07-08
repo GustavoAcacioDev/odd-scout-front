@@ -16,6 +16,10 @@ import { Button } from '@/components/ui/shadcn/button'
 import { Form } from '@/components/ui/shadcn/form'
 import { Separator } from '@/components/ui/shadcn/separator'
 import { validationText } from '@/config/validation-text'
+import {
+  useLoadingContext,
+  useSetterLoadingContext,
+} from '@/contexts/LoadingContext'
 import useAuth from '@/hooks/use-auth'
 import { useFormSubmitHandler } from '@/hooks/use-form-submit-handler'
 import { createLog } from '@/services/general/log-service-client'
@@ -37,8 +41,8 @@ const SignInSchema = z.object({
 type TSignInSchema = z.infer<typeof SignInSchema>
 
 function SigninForm() {
-  const [isLoading, setIsLoading] = useState(false)
-  const { onSubmitHandler } = useFormSubmitHandler()
+  const { isLoadingWithTransition } = useLoadingContext()
+  const { startLoading } = useSetterLoadingContext()
   const { authWithNextAuth } = useAuth()
   const router = useRouter()
 
@@ -53,13 +57,14 @@ function SigninForm() {
   const { handleSubmit } = form
 
   async function onSubmit(data: TSignInSchema) {
-    setIsLoading(true)
-
+    startLoading()
     try {
       await authWithNextAuth(data)
     } catch (error) {
       console.log('error on signIn onSubmit', error)
       const { message } = error as Error
+
+      console.log(message)
 
       if (message === '403') return router.push('/blocked-access')
 
@@ -71,7 +76,6 @@ function SigninForm() {
           route: '/sign-in',
         })
       }
-      setIsLoading(false)
     }
   }
 
@@ -100,7 +104,7 @@ function SigninForm() {
             variant="outline"
             className="w-full"
             form="signin-form"
-            disabled={isLoading}
+            disabled={isLoadingWithTransition}
           >
             Entrar na Conta
           </Button>
@@ -114,7 +118,7 @@ function SigninForm() {
           <Button
             type="button"
             variant="outline"
-            disabled={isLoading}
+            disabled={isLoadingWithTransition}
             className="flex w-full items-center gap-2"
             onClick={() => alert('Função não implementada')}
           >
@@ -136,7 +140,7 @@ function SigninForm() {
 
           <Button
             variant="default"
-            disabled={isLoading}
+            disabled={isLoadingWithTransition}
             className="w-full"
             type="button"
             asChild
