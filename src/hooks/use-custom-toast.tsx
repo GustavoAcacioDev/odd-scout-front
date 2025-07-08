@@ -11,7 +11,7 @@ export default function useCustomToast() {
   function errorToast(title: string, description: ReactNode | undefined) {
     return toast({
       action: (
-        <div className="w-fit rounded-full bg-negativePure p-1">
+        <div className="bg-negativePure w-fit rounded-full p-1">
           <XCircle className="h-10 w-10 text-white md:h-10 md:w-10" />
         </div>
       ),

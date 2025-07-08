@@ -2,23 +2,24 @@
 import { usePathname } from 'next/navigation'
 import { useCallback } from 'react'
 
-import { createLog } from '@/services/general/log-service-client'
-import useCustomToast from './use-custom-toast'
-import { TFormSubmitHandler } from '@/types/form-submit'
 import { useSetResponseDialog } from '@/contexts/ResponseDialogContext'
+import { createLog } from '@/services/general/log-service-client'
+import { TFormSubmitHandler } from '@/types/form-submit'
+
+import useCustomToast from './use-custom-toast'
 
 interface ValidationErrors {
-  [fieldName: string]: string[];
+  [fieldName: string]: string[]
 }
 
 function mapValidationErrors(errors: ValidationErrors): Map<number, string[]> {
-  const errorMap = new Map<number, string[]>();
+  const errorMap = new Map<number, string[]>()
 
   Object.entries(errors).forEach(([_, messages], index) => {
-    errorMap.set(index, messages);
-  });
+    errorMap.set(index, messages)
+  })
 
-  return errorMap;
+  return errorMap
 }
 
 export function useFormSubmitHandler() {
@@ -62,7 +63,6 @@ export function useFormSubmitHandler() {
             options.onSuccessCb(res)
           }
         } else {
-
           openDialog({
             status: options.onFailureMessage?.status || 'fail',
             title: onFailureDialogTitle,
@@ -79,7 +79,10 @@ export function useFormSubmitHandler() {
         const errorCause = JSON.parse(errorMessage.error).errors
         console.log(errorCause)
         const errorDetail = JSON.parse(errorMessage.error).detail
-        const errorMappedResponse = (mapValidationErrors(errorCause || [{'': [errorDetail]}]).get(0) || [''])[0] || errorDetail
+        const errorMappedResponse =
+          (mapValidationErrors(errorCause || [{ '': [errorDetail] }]).get(
+            0,
+          ) || [''])[0] || errorDetail
 
         if (onCatchLog) {
           console.error(onCatchLog, error)

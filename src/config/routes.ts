@@ -5,17 +5,12 @@
 /**
  * Rotas de autenticação - usuários logados serão redirecionados para home
  */
-export const authRoutes: string[] = [
-    '/sign-in',
-    '/sign-up',
-] as const
+export const authRoutes: string[] = ['/sign-in', '/sign-up'] as const
 
 /**
  * Rotas públicas - acessíveis independente do status de autenticação
  */
-export const publicRoutes: string[] = [
-    '/',
-] as const
+export const publicRoutes: string[] = ['/'] as const
 
 /**
  * Prefixo das rotas da API de autenticação do next-auth

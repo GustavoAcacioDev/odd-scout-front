@@ -3,7 +3,7 @@ import { headers } from 'next/headers'
 import { TLogReq } from '@/app/api/route'
 
 export async function createLogServer(data: TLogReq) {
-  const headersList =  await headers()
+  const headersList = await headers()
   const origin = headersList.get('x-forwarded-host')
   const proto = headersList.get('x-forwarded-proto')
 

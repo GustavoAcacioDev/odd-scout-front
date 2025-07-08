@@ -1,12 +1,12 @@
-import "./AuthBackground.css";
+import './AuthBackground.css'
 
-import { CheckCircleIcon } from "@phosphor-icons/react/dist/ssr";
+import { CheckCircleIcon } from '@phosphor-icons/react/dist/ssr'
 
 export function AuthBackground() {
   return (
-    <div className="hidden relative bg-primary h-full w-4/5 px-20 md:flex md:items-center">
-      <div className="max-w-[400px]  text-white pb-20 md:flex md:flex-col md:justify-center md:gap-6">
-        <h2 className="text-3xl xl:text-4xl 2xl:text-5xl font-extrabold">
+    <div className="bg-primary relative hidden h-full w-4/5 px-20 md:flex md:items-center">
+      <div className="max-w-[400px] pb-20 text-white md:flex md:flex-col md:justify-center md:gap-6">
+        <h2 className="text-3xl font-extrabold xl:text-4xl 2xl:text-5xl">
           O controle das suas bets como nunca antes
         </h2>
 
@@ -15,16 +15,16 @@ export function AuthBackground() {
           online com facilidade e o melhor valor.
         </p>
 
-        <ul className="text-lg space-y-4 font-semibold">
-          <li className="flex gap-2 items-center">
+        <ul className="space-y-4 text-lg font-semibold">
+          <li className="flex items-center gap-2">
             <CheckCircleIcon size={24} /> Comparação 100% digital
           </li>
 
-          <li className="flex gap-2 items-center">
+          <li className="flex items-center gap-2">
             <CheckCircleIcon size={24} /> Análise especializada de valor
           </li>
 
-          <li className="flex gap-2 items-center">
+          <li className="flex items-center gap-2">
             <CheckCircleIcon size={24} /> Odds justas e transparentes
           </li>
         </ul>
@@ -43,5 +43,5 @@ export function AuthBackground() {
         <li></li>
       </ul>
     </div>
-  );
+  )
 }

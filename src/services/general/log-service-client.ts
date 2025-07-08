@@ -1,4 +1,4 @@
-import { TLogReq } from "@/app/api/route"
+import { TLogReq } from '@/app/api/route'
 
 export async function createLog(data: TLogReq) {
   try {

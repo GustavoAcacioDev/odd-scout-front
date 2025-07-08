@@ -1,14 +1,14 @@
-import SideMenuSheet from '@/components/layout/Menu/SideMenuSheet';
+import { Sidebar } from "@/components/layout/sidebar/Sidebar";
 
 export default function ProtectedLayout({
-    children,
+  children,
 }: {
-    children: React.ReactNode;
+  children: React.ReactNode;
 }) {
-    return (
-        <main className="bg-gray-50 h-dvh w-screen grid grid-cols-auto-1fr">
-            <SideMenuSheet />
-            {children}
-        </main>
-    );
+  return (
+    <main className="bg-gray-50 h-dvh w-screen flex">
+      <Sidebar />
+      {children}
+    </main>
+  );
 }

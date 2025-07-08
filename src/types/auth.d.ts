@@ -11,10 +11,10 @@ export type TSignUpUserBody = {
 }
 
 export type TLoginUserResponse = {
-  accessToken: string;
-  expiresIn: number;
-  expiresInDate: Date;
-  decodedToken: TJwtPayload;
-  roles: TRoles[];
-  isHeadquartersAdmin: boolean;
-};
+  accessToken: string
+  expiresIn: number
+  expiresInDate: Date
+  decodedToken: TJwtPayload
+  roles: TRoles[]
+  isHeadquartersAdmin: boolean
+}

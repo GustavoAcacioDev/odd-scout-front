@@ -22,7 +22,7 @@ const SheetOverlay = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <SheetPrimitive.Overlay
     className={cn(
-      'fixed inset-0 z-50 bg-black bg-opacity-[0.24] backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
+      'bg-opacity-[0.24] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black backdrop-blur-sm',
       className,
     )}
     {...props}
@@ -85,7 +85,7 @@ const SheetContent = React.forwardRef<
             <SheetPrimitive.Close
               autoFocus
               className={twMerge(
-                'absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-lg border-[1px] border-gray-300 opacity-70 ring-offset-white transition-opacity hover:opacity-100 focus:outline-none focus:ring-1 focus:ring-gray-300 disabled:pointer-events-none data-[state=open]:bg-slate-100 dark:ring-offset-slate-950 dark:focus:ring-slate-300 dark:data-[state=open]:bg-slate-800 md:right-8 md:top-8',
+                'absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-lg border-[1px] border-gray-300 opacity-70 ring-offset-white transition-opacity hover:opacity-100 focus:ring-1 focus:ring-gray-300 focus:outline-none disabled:pointer-events-none data-[state=open]:bg-slate-100 md:top-8 md:right-8 dark:ring-offset-slate-950 dark:focus:ring-slate-300 dark:data-[state=open]:bg-slate-800',
                 closeButtonStyle,
               )}
             >
@@ -157,7 +157,7 @@ const SheetCloseButton = ({
     {...props}
     autoFocus
     className={twMerge(
-      'flex h-8 w-8 items-center justify-center rounded-lg border-[1px] border-gray-300 opacity-70 ring-offset-white transition-opacity hover:opacity-100 focus:outline-none focus:ring-1 focus:ring-gray-300 disabled:pointer-events-none data-[state=open]:bg-slate-100 dark:ring-offset-slate-950 dark:focus:ring-slate-300 dark:data-[state=open]:bg-slate-800 md:right-8 md:top-8',
+      'flex h-8 w-8 items-center justify-center rounded-lg border-[1px] border-gray-300 opacity-70 ring-offset-white transition-opacity hover:opacity-100 focus:ring-1 focus:ring-gray-300 focus:outline-none disabled:pointer-events-none data-[state=open]:bg-slate-100 md:top-8 md:right-8 dark:ring-offset-slate-950 dark:focus:ring-slate-300 dark:data-[state=open]:bg-slate-800',
       className,
     )}
   >

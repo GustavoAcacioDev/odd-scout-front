@@ -46,7 +46,7 @@ export default function AlertDialogContent({
       {
         <h1
           className={twMerge(
-            'text-xl font-bold leading-6',
+            'text-xl leading-6 font-bold',
             type === 'success' && 'text-gray-800',
             type === 'fail' && 'text-negativePure',
             type === 'warning' && 'text-gray-800',

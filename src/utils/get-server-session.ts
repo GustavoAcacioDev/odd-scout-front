@@ -1,9 +1,9 @@
-import { getServerSession } from "next-auth";
+import { getServerSession } from 'next-auth'
 
-import { authOptions } from "@/lib/auth-options";
+import { authOptions } from '@/lib/auth-options'
 
 export function getSessionServer() {
-  const session = getServerSession(authOptions);
+  const session = getServerSession(authOptions)
 
-  return session;
+  return session
 }

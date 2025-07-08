@@ -43,7 +43,7 @@ export default function CustomDialog({
 
       <DialogContent
         className={twMerge(
-          'grid max-w-[90%] grid-rows-1fr-auto gap-0 overflow-hidden md:max-w-[450px]',
+          'grid-rows-1fr-auto grid max-w-[90%] gap-0 overflow-hidden md:max-w-[450px]',
           containerClassName,
         )}
       >

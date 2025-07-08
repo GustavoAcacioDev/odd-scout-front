@@ -19,7 +19,7 @@ type TResponseDialogContext = {
 type TSetResponseDialogContext = {
   openDialog: (contentObj: TOpenDialogData) => void
   closeDialog: () => void
-} 
+}
 
 const ResponseDialogContext = createContext({} as TResponseDialogContext)
 const SetResponseDialogContext = createContext({} as TSetResponseDialogContext)
