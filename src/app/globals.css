@@ -4,7 +4,17 @@
 
 @theme inline {
   /* Suas cores customizadas */
+  --color-primary-50: #DAECF5;
+  --color-primary-100: #D6EAF4;
+  --color-primary-200: #C9E4F1;
+  --color-primary-300: #B6D9EB;
+  --color-primary-400: #9BCBE3;
+  --color-primary-500: #7BB9D8;
   --color-primary: #57a4cb;
+  --color-primary-700: #3C8AB3;
+  --color-primary-800: #306887;
+  --color-primary-900: #23465A;
+  --color-primary-950: #13242E;
   --color-alert: #ffae00;
   --color-yellow: #ffcc00;
   --color-neutral-orange: #ff6b00;

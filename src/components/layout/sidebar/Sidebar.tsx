@@ -1,37 +1,67 @@
+'use client'
+
 import {
-  LayoutDashboard,
-  CreditCard,
-  ArrowUpDown,
-  Wallet,
   ChevronDown,
-  Settings,
-  HelpCircle,
-  ListChecks,
   Clock,
+  HelpCircle,
+  LayoutDashboard,
   LineChart,
-} from "lucide-react"
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/shadcn/button"
-import Link from "next/link"
-import Image from "next/image"
-import { OddScoutLogo } from "@/assets/svg"
+  ListChecks,
+  Settings,
+  Wallet,
+} from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+
+import { OddScoutLogo } from '@/assets/svg'
+import { Button } from '@/components/ui/shadcn/button'
+import { cn } from '@/lib/utils'
 
 const menuItems = [
-  { icon: LayoutDashboard, href: "/dashboard", label: "Dashboard", hasDropdown: false, active: true },
-  { icon: ListChecks, href: "/dashboard", label: "My Bets", hasDropdown: false, active: false },
-  { icon: Clock, href: "/dashboard", label: "History", hasDropdown: false, active: false },
-  { icon: LineChart, href: "/dashboard", label: "Analytics", hasDropdown: false, active: false },
-  { icon: Wallet, href: "/dashboard", label: "Wallet", false: false, active: false },
+  {
+    icon: LayoutDashboard,
+    href: '/dashboard',
+    label: 'Dashboard',
+    hasDropdown: false,
+    active: true,
+  },
+  {
+    icon: ListChecks,
+    href: '/bets',
+    label: 'My Bets',
+    hasDropdown: false,
+    active: false,
+  },
+  {
+    icon: Clock,
+    href: '/history',
+    label: 'History',
+    hasDropdown: false,
+    active: false,
+  },
+  {
+    icon: LineChart,
+    href: '/analytics',
+    label: 'Analytics',
+    hasDropdown: false,
+    active: false,
+  },
+  {
+    icon: Wallet,
+    href: '/wallet',
+    label: 'Wallet',
+    false: false,
+    active: false,
+  },
 ]
 
 export function Sidebar() {
+  const pathname = usePathname()
   return (
-    <div className="w-64 bg-white border-r border-gray-200 flex flex-col">
+    <div className="flex w-64 flex-col border-r border-gray-200 bg-white">
       <div className="px-6">
-        <Link
-          href="/"
-          className="flex items-center md:h-[81px] md:w-[145px]"
-        >
+        <Link href="/" className="flex items-center md:h-[81px] md:w-[145px]">
           <Image
             src={OddScoutLogo}
             alt=""
@@ -44,33 +74,33 @@ export function Sidebar() {
         </Link>
       </div>
 
-      <nav className="flex-1 px-4 space-y-2">
+      <nav className="flex-1 space-y-2 px-4">
         {menuItems.map((item) => (
-          <Button
-            key={item.label}
-            variant="ghost"
-            asChild
-          >
-            <Link href={item.href} className={cn(
-              "w-full justify-start gap-3 h-10",
-              item.active && "bg-blue-50 text-blue-600 hover:bg-blue-50",
-            )}>
-              <item.icon className="w-4 h-4" />
+          <Button key={item.label} variant="ghost" asChild>
+            <Link
+              href={item.href}
+              className={cn(
+                'h-10 w-full justify-start gap-3',
+                pathname === item.href &&
+                  'bg-primary-50 text-primary-600 hover:bg-primary-50',
+              )}
+            >
+              <item.icon className="h-4 w-4" />
               <span className="flex-1 text-left">{item.label}</span>
-              {item.hasDropdown && <ChevronDown className="w-4 h-4" />}
+              {item.hasDropdown && <ChevronDown className="h-4 w-4" />}
             </Link>
           </Button>
         ))}
       </nav>
 
-      <div className="p-4 border-t border-gray-200">
+      <div className="border-t border-gray-200 p-4">
         <div className="space-y-2">
-          <Button variant="ghost" className="w-full justify-start gap-3 h-10">
-            <Settings className="w-4 h-4" />
+          <Button variant="ghost" className="h-10 w-full justify-start gap-3">
+            <Settings className="h-4 w-4" />
             Settings
           </Button>
-          <Button variant="ghost" className="w-full justify-start gap-3 h-10">
-            <HelpCircle className="w-4 h-4" />
+          <Button variant="ghost" className="h-10 w-full justify-start gap-3">
+            <HelpCircle className="h-4 w-4" />
             Help
           </Button>
 
