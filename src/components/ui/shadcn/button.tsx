@@ -46,7 +46,7 @@ const buttonVariants = cva(
           'bg-neutral-orange text-white font-bold text-sm leading-sm hover:bg-neutral-orange/80',
       },
       size: {
-        default: 'h-12 min-h-10 tablet:h-[48px] rounded-full px-7',
+        default: 'h-12 min-h-10 md:h-[48px] rounded-full px-7',
         sm: 'px-8 h-[40px] min-h-10 rounded-full',
         md: 'px-8 h-[48px] min-h-10 rounded-full',
         '2x1': 'leading-[18px] text-[18px] py-[10px] px-8 rounded-2xl ',

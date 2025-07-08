@@ -17,6 +17,8 @@ import { Separator } from "@/components/ui/shadcn/separator";
 import { validationText } from "@/config/validation-text";
 import useAuth from "@/hooks/use-auth";
 import { createLog } from "@/services/general/log-service-client";
+import { useFormSubmitHandler } from "@/hooks/use-form-submit-handler";
+import { error } from "console";
 
 const { requiredError, maxCharacters, invalidEmail } = validationText.zod;
 
@@ -36,6 +38,7 @@ type TSignInSchema = z.infer<typeof SignInSchema>;
 
 function SigninForm() {
   const [isLoading, setIsLoading] = useState(false)
+  const { onSubmitHandler } = useFormSubmitHandler();
   const { authWithNextAuth } = useAuth();
   const router = useRouter();
 
@@ -50,10 +53,10 @@ function SigninForm() {
   const { handleSubmit } = form;
 
   async function onSubmit(data: TSignInSchema) {
+    setIsLoading(true);
+
     try {
-      setIsLoading(true);
       await authWithNextAuth(data);
-      setIsLoading(false);
     } catch (error) {
       console.log("error on signIn onSubmit", error);
       const { message } = error as Error;

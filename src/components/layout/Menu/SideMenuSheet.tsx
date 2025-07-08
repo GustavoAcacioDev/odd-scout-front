@@ -12,7 +12,7 @@ function SideMenuSheet() {
             <header className="flex w-full items-center justify-center">
                 <Link
                     href="/"
-                    className="flex items-center tablet:h-[81px] tablet:w-[145px]"
+                    className="flex items-center md:h-[81px] md:w-[145px]"
                 >
                     <Image
                         src={OddScoutLogo}

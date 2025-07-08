@@ -1,4 +1,7 @@
+import error from "./error.svg";
 import GoogleLogo from "./google.svg";
 import OddScoutLogo from "./logo.svg";
+import toastSuccess from "./toast-success.svg";
+import warning from "./warning.svg";
 
-export { GoogleLogo, OddScoutLogo };
+export { error, GoogleLogo, OddScoutLogo, toastSuccess, warning };

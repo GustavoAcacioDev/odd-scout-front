@@ -15,6 +15,7 @@ import { validationText } from "@/config/validation-text";
 import useAuth from "@/hooks/use-auth";
 import { createLog } from "@/services/general/log-service-client";
 import { registerUserClient } from "@/services/auth/auth-service-client";
+import { useFormSubmitHandler } from "@/hooks/use-form-submit-handler";
 
 const { requiredError, maxCharacters, invalidEmail, minValue } = validationText.zod;
 
@@ -44,9 +45,11 @@ const SignUpSchema = z.object({
 type TSignUpSchema = z.infer<typeof SignUpSchema>;
 
 export default function SignupForm() {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const { onSubmitHandler } = useFormSubmitHandler()
   const { authWithNextAuth } = useAuth();
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm({
     resolver: zodResolver(SignUpSchema),
@@ -63,39 +66,37 @@ export default function SignupForm() {
   async function onSubmit(data: TSignUpSchema) {
     setIsLoading(true);
 
-    try {
-      const signupResponse = await registerUserClient(data);
-
-      if (!signupResponse.isSuccess) {
-        throw new Error(signupResponse.errors[0]);
-      }
-
-      await authWithNextAuth({
-        email: data.email,
-        password: data.password,
-      });
-
-    } catch (error) {
-      console.log("error on signUp onSubmit", error);
-      const { message } = error as Error;
-
-      if (message === "403") {
-        return router.push("/blocked-access");
-      }
-
-      if (error) {
-        createLog({
-          block: "Catch",
-          component: "SignUp Form",
-          error: message,
-          route: "/sign-up",
-        });
-      }
-
-      console.error("Erro no cadastro:", message);
-
-      setIsLoading(false)
-    }
+    await onSubmitHandler({
+      data: data,
+      service: registerUserClient,
+      options: {
+        onSuccessMessage: {
+          title: 'Usuário Criado',
+          message: 'Seu usuário foi criado com sucesso.',
+        },
+        onSuccessCb: async () => {
+          await authWithNextAuth({
+            email: data.email,
+            password: data.password,
+          });
+        },
+        onFailureCb: () => {
+          setIsLoading(false);
+        },
+        onCatchCb: () => {
+          setIsLoading(false);
+        },
+        onCatchMessage: {
+          logService: {
+            block: 'Catch of onSubmit',
+            component: 'SignupForm',
+          },
+          log: {
+            path: 'sign-up > onSubmit',
+          },
+        },
+      },
+    })
   }
 
   return (

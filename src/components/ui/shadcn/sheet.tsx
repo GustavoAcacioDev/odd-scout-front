@@ -39,9 +39,9 @@ const sheetVariants = cva(
         top: 'inset-x-0 top-0 border-b data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top',
         bottom:
           'max-h-[80dvh] inset-x-0 bottom-0 border-t data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom',
-        left: 'inset-y-0 left-0 h-full w-3/4 border-r data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left tablet:max-w-sm',
+        left: 'inset-y-0 left-0 h-full w-3/4 border-r data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left md:max-w-sm',
         right:
-          'inset-y-0 right-0 h-full w-3/4 border-l data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right tablet:max-w-[492px]',
+          'inset-y-0 right-0 h-full w-3/4 border-l data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right md:max-w-[492px]',
       },
     },
     defaultVariants: {
@@ -85,7 +85,7 @@ const SheetContent = React.forwardRef<
             <SheetPrimitive.Close
               autoFocus
               className={twMerge(
-                'absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-lg border-[1px] border-gray-300 opacity-70 ring-offset-white transition-opacity hover:opacity-100 focus:outline-none focus:ring-1 focus:ring-gray-300 disabled:pointer-events-none data-[state=open]:bg-slate-100 dark:ring-offset-slate-950 dark:focus:ring-slate-300 dark:data-[state=open]:bg-slate-800 tablet:right-8 tablet:top-8',
+                'absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-lg border-[1px] border-gray-300 opacity-70 ring-offset-white transition-opacity hover:opacity-100 focus:outline-none focus:ring-1 focus:ring-gray-300 disabled:pointer-events-none data-[state=open]:bg-slate-100 dark:ring-offset-slate-950 dark:focus:ring-slate-300 dark:data-[state=open]:bg-slate-800 md:right-8 md:top-8',
                 closeButtonStyle,
               )}
             >
@@ -104,7 +104,7 @@ const SheetHeader = ({
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) => (
-  <div className={cn('flex flex-col tablet:text-left', className)} {...props} />
+  <div className={cn('flex flex-col md:text-left', className)} {...props} />
 )
 SheetHeader.displayName = 'SheetHeader'
 
@@ -114,7 +114,7 @@ const SheetFooter = ({
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
     className={cn(
-      'flex flex-col-reverse tablet:flex-row tablet:justify-end tablet:space-x-2',
+      'flex flex-col-reverse md:flex-row md:justify-end md:space-x-2',
       className,
     )}
     {...props}
@@ -157,7 +157,7 @@ const SheetCloseButton = ({
     {...props}
     autoFocus
     className={twMerge(
-      'flex h-8 w-8 items-center justify-center rounded-lg border-[1px] border-gray-300 opacity-70 ring-offset-white transition-opacity hover:opacity-100 focus:outline-none focus:ring-1 focus:ring-gray-300 disabled:pointer-events-none data-[state=open]:bg-slate-100 dark:ring-offset-slate-950 dark:focus:ring-slate-300 dark:data-[state=open]:bg-slate-800 tablet:right-8 tablet:top-8',
+      'flex h-8 w-8 items-center justify-center rounded-lg border-[1px] border-gray-300 opacity-70 ring-offset-white transition-opacity hover:opacity-100 focus:outline-none focus:ring-1 focus:ring-gray-300 disabled:pointer-events-none data-[state=open]:bg-slate-100 dark:ring-offset-slate-950 dark:focus:ring-slate-300 dark:data-[state=open]:bg-slate-800 md:right-8 md:top-8',
       className,
     )}
   >

@@ -14,7 +14,6 @@ export default function useAuth() {
     })
 
     if (res?.ok) {
-      console.log('sign in response', res)
       return router.push('/dashboard')
     }
 
