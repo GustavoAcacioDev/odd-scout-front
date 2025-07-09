@@ -1,8 +1,23 @@
-import { Activity, DollarSign, Target, TrendingUp } from 'lucide-react'
+import { Activity, DollarSign, Filter, Target, TrendingUp } from 'lucide-react'
 import React from 'react'
 
 import PageContainer from '@/components/layout/PageContainer'
+import DashboardTable from '@/components/pages/dashboard/DashboardTable'
 import InformationCard from '@/components/pages/dashboard/InformationCard'
+import { Button } from '@/components/ui/shadcn/button'
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/shadcn/card'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/shadcn/select'
 
 function DashboardPage() {
   return (
@@ -58,6 +73,8 @@ function DashboardPage() {
           }
         />
       </div>
+
+      <DashboardTable />
     </PageContainer>
   )
 }

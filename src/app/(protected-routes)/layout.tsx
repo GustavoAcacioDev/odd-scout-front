@@ -9,7 +9,7 @@ export default function ProtectedLayout({
   return (
     <main className="flex h-dvh w-screen bg-gray-50">
       <Sidebar />
-      <div className="grid-rows-auto-1fr grid h-dvh w-full">
+      <div className="grid-rows-auto-1fr grid h-dvh w-full overflow-auto">
         <PageHeader />
         {children}
       </div>

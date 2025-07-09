@@ -1,6 +1,6 @@
 export const i18nRouteTitles = new Map<string, string>([
   ['dashboard', 'Dashboard'],
-  ['bets', 'Minhas Apostas'],
+  ['bets', 'Open Bets'],
 ])
 
 export function getHeaderTitle(pathname: string) {

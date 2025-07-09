@@ -23,28 +23,24 @@ const menuItems = [
     icon: LayoutDashboard,
     href: '/dashboard',
     label: 'Dashboard',
-    hasDropdown: false,
     active: true,
   },
   {
     icon: ListChecks,
     href: '/bets',
-    label: 'My Bets',
-    hasDropdown: false,
+    label: 'Open Bets',
     active: false,
   },
   {
     icon: Clock,
     href: '/history',
     label: 'History',
-    hasDropdown: false,
     active: false,
   },
   {
     icon: LineChart,
     href: '/analytics',
     label: 'Analytics',
-    hasDropdown: false,
     active: false,
   },
   {
@@ -87,7 +83,6 @@ export function Sidebar() {
             >
               <item.icon className="h-4 w-4" />
               <span className="flex-1 text-left">{item.label}</span>
-              {item.hasDropdown && <ChevronDown className="h-4 w-4" />}
             </Link>
           </Button>
         ))}
