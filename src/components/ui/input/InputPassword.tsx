@@ -43,7 +43,7 @@ const InputPassword = <TFieldValues extends FieldValues = FieldValues>({
 
           <FormControl>
             <div className="relative">
-              <span className="absolute bottom-3 right-0 flex items-center px-4 hover:cursor-pointer">
+              <span className="absolute right-0 bottom-3 flex items-center px-4 hover:cursor-pointer">
                 {!show ? (
                   <EyeOff
                     className="text-gray-700"

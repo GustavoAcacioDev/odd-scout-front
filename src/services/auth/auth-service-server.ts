@@ -5,10 +5,11 @@ import { ApiResponse } from "../../../global";
 
 export async function loginUserServer(data: TLoginUserBody) {
   const fetch = fetchAnonServer();
-
+  console.log("teste estou aqui");
+  
   const res = await fetch.post<TLoginUserBody, ApiResponse<TLoginUserResponse>>(
     "/auth/signin",
-    data
+    data,
   );
 
   console.log(`service`, res);

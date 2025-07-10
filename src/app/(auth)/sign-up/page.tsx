@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react'
 
-import AuthCard from "@/components/pages/auth/AuthCard";
-import SignupForm from "@/components/pages/auth/Signup/SignupForm";
+import AuthCard from '@/components/pages/auth/AuthCard'
+import SignupForm from '@/components/pages/auth/Signup/SignupForm'
 
 export default function SignUpPage() {
   return (
-    <div className="w-full flex flex-col gap-6 items-center justify-center">
+    <div className="flex w-full flex-col items-center justify-center gap-6">
       <AuthCard>
         <div className="">
           <h1 className="text-3xl font-extrabold text-gray-800">
@@ -19,5 +19,5 @@ export default function SignUpPage() {
         <SignupForm />
       </AuthCard>
     </div>
-  );
+  )
 }

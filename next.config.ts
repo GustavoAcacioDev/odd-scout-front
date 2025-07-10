@@ -6,4 +6,12 @@ const nextConfig: NextConfig = {
   output: 'standalone'
 };
 
+if (process.env.REMOVE_LOGS === 'true') {
+  nextConfig.compiler = {
+    removeConsole: {
+      exclude: ['error'],
+    },
+  }
+}
+
 export default nextConfig;

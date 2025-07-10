@@ -1,6 +1,11 @@
 {
-  "extends": ["next", "next/core-web-vitals", "plugin:@typescript-eslint/recommended", "prettier"],
-  "plugins": ["simple-import-sort"],
+  "extends": [
+    "@rocketseat/eslint-config/next",
+    "next/core-web-vitals"
+  ],
+  "plugins": [
+    "simple-import-sort"
+  ],
   "rules": {
     "simple-import-sort/imports": "error",
     "@typescript-eslint/no-unused-vars": "warn",

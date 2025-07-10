@@ -3,7 +3,13 @@ import React, { HTMLAttributes } from 'react'
 import { FieldValues, Path, UseFormReturn } from 'react-hook-form'
 import { twMerge } from 'tailwind-merge'
 
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '../shadcn/form'
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '../shadcn/form'
 import { Input } from '../shadcn/input'
 
 const InputDefault = <TFieldValues extends FieldValues = FieldValues>({

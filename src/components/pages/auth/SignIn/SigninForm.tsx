@@ -1,24 +1,30 @@
-"use client";
+'use client'
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import React from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { zodResolver } from '@hookform/resolvers/zod'
+import { error } from 'console'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import React, { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
 
-import { GoogleLogo } from "@/assets/svg";
-import InputDefault from "@/components/ui/input/InputDefault";
-import InputPassword from "@/components/ui/input/InputPassword";
-import { Button } from "@/components/ui/shadcn/button";
-import { Form } from "@/components/ui/shadcn/form";
-import { Separator } from "@/components/ui/shadcn/separator";
-import { validationText } from "@/config/validation-text";
-import useAuth from "@/hooks/use-auth";
-import { createLog } from "@/services/general/log-service-client";
+import { GoogleLogo } from '@/assets/svg'
+import InputDefault from '@/components/ui/input/InputDefault'
+import InputPassword from '@/components/ui/input/InputPassword'
+import { Button } from '@/components/ui/shadcn/button'
+import { Form } from '@/components/ui/shadcn/form'
+import { Separator } from '@/components/ui/shadcn/separator'
+import { validationText } from '@/config/validation-text'
+import {
+  useLoadingContext,
+  useSetterLoadingContext,
+} from '@/contexts/LoadingContext'
+import useAuth from '@/hooks/use-auth'
+import { useFormSubmitHandler } from '@/hooks/use-form-submit-handler'
+import { createLog } from '@/services/general/log-service-client'
 
-const { requiredError, maxCharacters, invalidEmail } = validationText.zod;
+const { requiredError, maxCharacters, invalidEmail } = validationText.zod
 
 const SignInSchema = z.object({
   email: z
@@ -30,40 +36,45 @@ const SignInSchema = z.object({
     .string()
     .min(1, { message: requiredError })
     .max(200, { message: maxCharacters(200) }),
-});
+})
 
-type TSignInSchema = z.infer<typeof SignInSchema>;
+type TSignInSchema = z.infer<typeof SignInSchema>
 
 function SigninForm() {
-  const { authWithNextAuth } = useAuth();
-  const router = useRouter();
+  const { isLoadingWithTransition } = useLoadingContext()
+  const { startLoading } = useSetterLoadingContext()
+  const { authWithNextAuth } = useAuth()
+  const router = useRouter()
 
   const form = useForm({
     resolver: zodResolver(SignInSchema),
     defaultValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
-  });
+  })
 
-  const { handleSubmit } = form;
+  const { handleSubmit } = form
 
   async function onSubmit(data: TSignInSchema) {
+    startLoading()
     try {
-      await authWithNextAuth(data);
+      await authWithNextAuth(data)
     } catch (error) {
-      console.log("error on signIn onSubmit", error);
-      const { message } = error as Error;
+      console.log('error on signIn onSubmit', error)
+      const { message } = error as Error
 
-      if (message === "403") return router.push("/blocked-access");
+      console.log(message)
+
+      if (message === '403') return router.push('/blocked-access')
 
       if (error) {
         createLog({
-          block: "Catch",
-          component: "SignIn Form",
+          block: 'Catch',
+          component: 'SignIn Form',
           error: message,
-          route: "/sign-in",
-        });
+          route: '/sign-in',
+        })
       }
     }
   }
@@ -81,23 +92,24 @@ function SigninForm() {
           <InputPassword form={form} name="password" label="Senha" />
           <Link
             href="/forgot-password"
-            className="inline-block text-sm w-full text-end text-blue font-medium hover:underline"
+            className="text-blue inline-block w-full text-end text-sm font-medium hover:underline"
           >
             Esqueceu sua senha?
           </Link>
         </div>
 
-        <div className="flex flex-col gap-4 w-full">
+        <div className="flex w-full flex-col gap-4">
           <Button
+            type="submit"
             variant="outline"
             className="w-full"
-            type="submit"
             form="signin-form"
+            disabled={isLoadingWithTransition}
           >
             Entrar na Conta
           </Button>
 
-          <div className="w-full flex items-center gap-4">
+          <div className="flex w-full items-center gap-4">
             <Separator className="shrink" />
             <span className="font-semibold text-gray-600">OU</span>
             <Separator className="shrink" />
@@ -106,25 +118,29 @@ function SigninForm() {
           <Button
             type="button"
             variant="outline"
-            className="w-full flex gap-2 items-center"
-            onClick={() => alert("Função não implementada")}
+            disabled={isLoadingWithTransition}
+            className="flex w-full items-center gap-2"
+            onClick={() => alert('Função não implementada')}
           >
             <Image
               src={GoogleLogo}
               alt="G representando o logo do Google"
               height={16}
-            />{" "}
+            />{' '}
             Continuar com Google
           </Button>
 
-          <div className="w-full flex items-center gap-4">
+          <div className="flex w-full items-center gap-4">
             <Separator className="shrink" />
-            <span className="w-full text-center text-sm font-semibold text-gray-600 text-nowrap">Ainda não tem uma conta?</span>
+            <span className="w-full text-center text-sm font-semibold text-nowrap text-gray-600">
+              Ainda não tem uma conta?
+            </span>
             <Separator className="shrink" />
           </div>
 
           <Button
             variant="default"
+            disabled={isLoadingWithTransition}
             className="w-full"
             type="button"
             asChild
@@ -133,12 +149,12 @@ function SigninForm() {
           </Button>
         </div>
 
-        <span className="w-full inline-block text-center text-xs font-semibold text-gray-400">
+        <span className="inline-block w-full text-center text-xs font-semibold text-gray-400">
           © 2025 OddScout. Todos os direitos reservados.
         </span>
       </form>
     </Form>
-  );
+  )
 }
 
-export default SigninForm;
+export default SigninForm
