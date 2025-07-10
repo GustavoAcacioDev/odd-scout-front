@@ -1,54 +1,37 @@
 'use client'
-import React, { useState } from 'react'
+import React from 'react'
 
-import SelectUncontrolled, {
-  TSelectOptions,
-} from '@/components/ui/select/SelectUncontrolled'
-import { Card, CardHeader, CardTitle } from '@/components/ui/shadcn/card'
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/shadcn/select'
-
-const filterOptions: TSelectOptions = [
-  {
-    id: 1,
-    value: '1',
-    content: 'Janeiro',
-  },
-]
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/shadcn/card'
+import { TableFooter } from '@/components/ui/shadcn/table'
+import TableContainer from '@/components/ui/table/TableContainer'
+import TableData from '@/components/ui/table/TableData'
+import TableEntries from '@/components/ui/table/TableEntries'
+import TablePagination from '@/components/ui/table/TablePagination'
+import TableSizeSelect from '@/components/ui/table/TableSizeSelect'
+import { availableBetsColumns } from '@/table-config/available-bets-columns'
 
 function DashboardTable() {
-  const [selectedFilter, setSelectedFilter] = useState(undefined)
-
   return (
     <div className="grid grid-cols-1 gap-6">
       <Card className="w-full">
         <CardHeader>
           <div className="flex items-center justify-between">
             <CardTitle className="text-2xl">Available Bets</CardTitle>
-
-            <div className="flex items-center gap-2">
-              <SelectUncontrolled
-                items={filterOptions}
-                placeholder="Selecione um filtro"
-              />
-              <Select defaultValue="all">
-                <SelectTrigger className="w-32">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Sports</SelectItem>
-                  <SelectItem value="nba">NBA</SelectItem>
-                  <SelectItem value="nfl">NFL</SelectItem>
-                  <SelectItem value="soccer">Soccer</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
           </div>
+          <CardContent className="px-0">
+            <TableContainer className="p-0">
+              <TableData
+                columns={availableBetsColumns}
+                data={[]}
+                isLoading={false}
+              />
+            </TableContainer>
+          </CardContent>
         </CardHeader>
       </Card>
     </div>
