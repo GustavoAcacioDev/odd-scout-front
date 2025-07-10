@@ -28,8 +28,6 @@ export const fetchAnonServer = () => {
     } catch (error) {
       const objError = error as Error
 
-      console.log(objError)
-
       const errorBody = {
         status: 0,
         statusText: 'Fetch Error',
@@ -39,6 +37,8 @@ export const fetchAnonServer = () => {
           request: request.url,
         },
       }
+
+      console.log(error)
 
       throw new Error(JSON.stringify(errorBody))
     }

@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import {
   ChevronDown,
@@ -9,51 +9,53 @@ import {
   ListChecks,
   Settings,
   Wallet,
-} from 'lucide-react'
-import Image from 'next/image'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+  Zap,
+} from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-import { OddScoutLogo } from '@/assets/svg'
-import { Button } from '@/components/ui/shadcn/button'
-import { cn } from '@/lib/utils'
+import { OddScoutLogo } from "@/assets/svg";
+import { Button } from "@/components/ui/shadcn/button";
+import { cn } from "@/lib/utils";
+import { Switch } from "@/components/ui/shadcn/switch";
 
 const menuItems = [
   {
     icon: LayoutDashboard,
-    href: '/dashboard',
-    label: 'Dashboard',
+    href: "/dashboard",
+    label: "Dashboard",
     active: true,
   },
   {
     icon: ListChecks,
-    href: '/bets',
-    label: 'Open Bets',
+    href: "/bets",
+    label: "Open Bets",
     active: false,
   },
   {
     icon: Clock,
-    href: '/history',
-    label: 'History',
+    href: "/history",
+    label: "History",
     active: false,
   },
   {
     icon: LineChart,
-    href: '/analytics',
-    label: 'Analytics',
+    href: "/analytics",
+    label: "Analytics",
     active: false,
   },
   {
     icon: Wallet,
-    href: '/wallet',
-    label: 'Wallet',
+    href: "/wallet",
+    label: "Wallet",
     false: false,
     active: false,
   },
-]
+];
 
 export function Sidebar() {
-  const pathname = usePathname()
+  const pathname = usePathname();
   return (
     <div className="flex w-64 flex-col border-r border-gray-200 bg-white">
       <div className="px-6">
@@ -76,9 +78,9 @@ export function Sidebar() {
             <Link
               href={item.href}
               className={cn(
-                'h-10 w-full justify-start gap-3',
+                "h-10 w-full justify-start gap-3",
                 pathname === item.href &&
-                  'bg-primary-50 text-primary-600 hover:bg-primary-50',
+                  "bg-primary-50 text-primary-600 hover:bg-primary-50",
               )}
             >
               <item.icon className="h-4 w-4" />
@@ -99,6 +101,14 @@ export function Sidebar() {
             Help
           </Button>
 
+          <div className="flex h-12 items-center justify-between px-7">
+            <div className="flex items-center gap-3">
+              <Zap className="h-4 w-4" />
+              <span className="text-sm">Auto Bet</span>
+            </div>
+            <Switch defaultChecked />
+          </div>
+
           <div className="flex items-center gap-3 pt-4">
             <div className="flex-1">
               <p className="text-sm font-medium">Gustavo</p>
@@ -108,5 +118,5 @@ export function Sidebar() {
         </div>
       </div>
     </div>
-  )
+  );
 }
