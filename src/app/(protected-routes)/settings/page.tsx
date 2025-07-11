@@ -20,7 +20,7 @@ import React from "react";
 
 export default function SettingsPage() {
   return (
-    <PageContainer className="grid grid-cols-2 gap-4">
+    <PageContainer className="grid grid-cols-1 gap-4 space-y-0 md:grid-cols-2">
       <Card>
         <CardHeader>
           <CardTitle>Profile Information</CardTitle>
