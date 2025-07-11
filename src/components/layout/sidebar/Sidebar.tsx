@@ -92,9 +92,11 @@ export function Sidebar() {
 
       <div className="border-t border-gray-200 p-4">
         <div className="space-y-2">
-          <Button variant="ghost" className="h-10 w-full justify-start gap-3">
-            <Settings className="h-4 w-4" />
-            Settings
+          <Button variant="ghost" asChild>
+            <Link href="/settings" className="h-10 w-full justify-start gap-3">
+              <Settings className="h-4 w-4" />
+              Settings
+            </Link>
           </Button>
           <Button variant="ghost" className="h-10 w-full justify-start gap-3">
             <HelpCircle className="h-4 w-4" />
