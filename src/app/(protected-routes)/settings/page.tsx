@@ -1,4 +1,6 @@
 import PageContainer from "@/components/layout/PageContainer";
+import ProfileForm from "@/components/pages/settings/ProfileForm";
+import SecurityForm from "@/components/pages/settings/SecurityForm";
 import { Button } from "@/components/ui/shadcn/button";
 import {
   Card,
@@ -21,36 +23,7 @@ import React from "react";
 export default function SettingsPage() {
   return (
     <PageContainer className="grid grid-cols-1 gap-4 space-y-0 md:grid-cols-2">
-      <Card>
-        <CardHeader>
-          <CardTitle>Profile Information</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            <div>
-              <Label htmlFor="first-name">First Name</Label>
-              <Input id="first-name" defaultValue="Gustavo" />
-            </div>
-            <div>
-              <Label htmlFor="last-name">Last Name</Label>
-              <Input id="last-name" defaultValue="Astika" />
-            </div>
-          </div>
-          <div>
-            <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              type="email"
-              defaultValue="astikayoung@gmail.com"
-            />
-          </div>
-          <div>
-            <Label htmlFor="phone">Phone Number</Label>
-            <Input id="phone" type="tel" placeholder="+1 (555) 123-4567" />
-          </div>
-          <Button>Save Changes</Button>
-        </CardContent>
-      </Card>
+      <ProfileForm />
 
       <Card className="h-auto">
         <CardHeader>
@@ -98,40 +71,10 @@ export default function SettingsPage() {
         </CardContent>
       </Card>
 
-      <Card className="h-full">
-        <CardHeader>
-          <CardTitle>Security</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div>
-            <Label htmlFor="current-password">Current Password</Label>
-            <Input id="current-password" type="password" />
-          </div>
-          <div>
-            <Label htmlFor="new-password">New Password</Label>
-            <Input id="new-password" type="password" />
-          </div>
-          <div>
-            <Label htmlFor="confirm-password">Confirm New Password</Label>
-            <Input id="confirm-password" type="password" />
-          </div>
+      <SecurityForm />
 
-          <div className="flex items-center justify-between">
-            <div>
-              <Label>Two-Factor Authentication</Label>
-              <p className="text-sm text-gray-500">
-                Add an extra layer of security
-              </p>
-            </div>
-            <Switch />
-          </div>
-
-          <Button>Update Security Settings</Button>
-        </CardContent>
-      </Card>
-
-      <div className="space-y-4">
-        <Card>
+      <div className="h-full space-y-4">
+        <Card className="h-auto">
           <CardHeader>
             <CardTitle>Notifications</CardTitle>
           </CardHeader>
@@ -168,7 +111,7 @@ export default function SettingsPage() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="h-auto">
           <CardHeader>
             <CardTitle>Account Actions</CardTitle>
           </CardHeader>
