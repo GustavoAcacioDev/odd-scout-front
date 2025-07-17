@@ -31,7 +31,7 @@ const toastVariants = cva(
     variants: {
       variant: {
         default: 'bg-background',
-        success: 'bg-light-green border border-positivePure shadow-success',
+        success: 'bg-positive-light border border-positive-pure shadow-success',
         danger:
           'bg-gradient-to-b from-red-100 from-100% via-red-100 via-100% to-white border border-negative-pure',
       },

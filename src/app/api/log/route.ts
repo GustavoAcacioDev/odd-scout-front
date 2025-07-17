@@ -20,29 +20,11 @@ const logSchema = z.object({
 export async function POST(request: Request) {
   try {
     const origin = request.headers.get('origin')
-    const originWithoutProto = origin?.replace('https://', '')
-    const forwardedHost = request.headers.get('x-forwarded-host')
     const userAgent = request.headers.get('user-agent')
     const json = await request.json()
 
     const currentDate = new Date()
     const BrazilDateTime = formatDateInBrazilianTime(currentDate)
-
-    if (originWithoutProto !== forwardedHost) {
-      console.error(
-        '[LOG_ERROR] on Log API Route from:',
-        origin,
-        '|| user-agent:',
-        userAgent,
-        '|| date:',
-        BrazilDateTime,
-        '|| Error:',
-        'Origin and forwarded host do not match:',
-        `-- Origin: ${origin} -- x-forwarded-host: ${forwardedHost}`,
-      )
-
-      return new NextResponse('Forbidden', { status: 403 })
-    }
 
     const res = logSchema.parse(json) as TLogReq
 
