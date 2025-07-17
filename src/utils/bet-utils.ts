@@ -1,4 +1,4 @@
-function renderBestOutcome(outcome: 1 | 2 | 3) {
+function renderBestOutcome(outcome: number) {
   switch (outcome) {
     case 1:
       return "Time 1";
