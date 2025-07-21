@@ -19,16 +19,14 @@ import runFullScrapingCycle from "@/services/scraping/scraping-service-client";
 
 function DashboardTable() {
   const queryClient = useQueryClient();
-  
+
   const queryFn = () => getAvailableBets();
-  
-  const {
-    items: availableBetsList,
-    isLoading: isLoadingBets,
-  } = useTableData<TAvaliableBets>({
-    queryKey: ["get-available-bets"],
-    queryFn,
-  });
+
+  const { items: availableBetsList, isLoading: isLoadingBets } =
+    useTableData<TAvaliableBets>({
+      queryKey: ["get-available-bets"],
+      queryFn,
+    });
 
   const scrapingMutation = useMutation({
     mutationFn: () => runFullScrapingCycle(),
@@ -59,16 +57,17 @@ function DashboardTable() {
               {scrapingMutation.isPending ? "Finding Bets..." : "Find Bets"}
             </Button>
           </div>
-          <CardContent className="px-0">
-            <TableContainer className="!grid-rows-auto-1fr p-0">
-              <TableData
-                columns={availableBetsColumns}
-                data={availableBetsList || []}
-                isLoading={isLoadingBets || scrapingMutation.isPending}
-              />
-            </TableContainer>
-          </CardContent>
         </CardHeader>
+
+        <CardContent>
+          <TableContainer className="!grid-rows-auto-1fr p-0">
+            <TableData
+              columns={availableBetsColumns}
+              data={availableBetsList || []}
+              isLoading={isLoadingBets || scrapingMutation.isPending}
+            />
+          </TableContainer>
+        </CardContent>
       </Card>
     </div>
   );
