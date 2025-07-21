@@ -1,11 +1,11 @@
-function renderBestOutcome(outcome: 1 | 2 | 3) {
+function renderBestOutcome(outcome: number) {
   switch (outcome) {
     case 1:
-      return "Time 1";
+      return "Team 1";
     case 2:
-      return "Empate";
+      return "Draw";
     case 3:
-      return "Time 2";
+      return "Team 2";
     default:
       return "Outcome not found";
   }

@@ -33,12 +33,10 @@ function DashboardTable() {
   const scrapingMutation = useMutation({
     mutationFn: () => runFullScrapingCycle(),
     onSuccess: () => {
-      // Invalida o cache após sucesso no scraping
       queryClient.invalidateQueries({ queryKey: ["get-available-bets"] });
     },
     onError: (error) => {
       console.error("Erro durante o scraping:", error);
-      // Aqui você pode adicionar notificação de erro se necessário
     },
   });
 
