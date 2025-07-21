@@ -21,7 +21,6 @@ import {
   Calculator,
   AlertCircle,
 } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { formatCurrency } from "@/utils/format";
 import { usePlaceBet } from "@/hooks/use-place-bet";
 
@@ -41,15 +40,12 @@ export default function PlaceBetDialog({ betData }: PlaceBetDialogProps) {
 
     const kellyFraction = (b * p - q) / b;
 
-    // Limitar a fração Kelly para ser mais conservador (máximo 25% do bankroll)
     const conservativeKelly = Math.min(kellyFraction, 0.25);
 
-    // Assumindo um bankroll padrão de R$ 1000 (isso pode vir das configurações do usuário)
     const defaultBankroll = 1000;
     const recommendedAmount = defaultBankroll * conservativeKelly;
 
-    // Arredondar para múltiplos de 5
-    return Math.max(5, Math.round(recommendedAmount / 5) * 5);
+    return recommendedAmount;
   }, [betData]);
 
   const potentialReturn = useMemo(() => {
@@ -81,7 +77,11 @@ export default function PlaceBetDialog({ betData }: PlaceBetDialogProps) {
   };
 
   const handleOpenBetPage = () => {
-    window.open(betData.link, "_blank", "noopener,noreferrer");
+    window.open(
+      process.env.NEXT_PUBLIC__BET_HOUSE_URL + betData.link,
+      "_blank",
+      "noopener,noreferrer",
+    );
   };
 
   const isValidAmount = parseFloat(betAmount) > 0;
@@ -91,15 +91,14 @@ export default function PlaceBetDialog({ betData }: PlaceBetDialogProps) {
       <DialogTrigger asChild>
         <Button size="sm">Place Bet</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[500px]">
+      <DialogContent className="p-6 sm:max-w-[600px]">
         <DialogHeader>
           <DialogTitle>Realizar Aposta</DialogTitle>
           <DialogDescription>
             Revise os detalhes da aposta antes de prosseguir
           </DialogDescription>
         </DialogHeader>
-
-        <div className="grid gap-6 py-4">
+        <div className="grid w-full gap-6 py-4">
           {/* Informações do Evento */}
           <div className="grid gap-2">
             <Label className="text-sm text-gray-500">Evento</Label>
@@ -124,7 +123,7 @@ export default function PlaceBetDialog({ betData }: PlaceBetDialogProps) {
           </div>
 
           {/* Estatísticas */}
-          <div className="grid grid-cols-3 gap-4 rounded-lg bg-gray-50 p-4">
+          <div className="grid w-full grid-cols-3 gap-4 rounded-lg bg-gray-50 p-4">
             <div className="text-center">
               <div className="text-sm text-gray-500">EV</div>
               <div className="font-semibold text-green-600">
