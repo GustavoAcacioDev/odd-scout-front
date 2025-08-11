@@ -27,7 +27,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={twMerge(
-          'max-h-screen overflow-hidden antialiased',
+          'max-h-screen overflow-auto antialiased',
           roboto.variable,
         )}
       >

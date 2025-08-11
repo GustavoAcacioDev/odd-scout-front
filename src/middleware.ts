@@ -4,6 +4,15 @@ import { withAuth } from 'next-auth/middleware'
 
 import { apiAuthPrefix, authRoutes, publicRoutes } from './config/routes'
 
+function isTokenExpired(token: any): boolean {
+  if (!token?.expiresInDate) return false
+  
+  const now = Date.now()
+  const expiresAt = new Date(token.expiresInDate).getTime()
+  
+  return now >= expiresAt
+}
+
 export default withAuth(
   function middleware(req: NextRequestWithAuth) {
     const { nextUrl } = req
@@ -39,9 +48,15 @@ export default withAuth(
   },
   {
     callbacks: {
-      // Esta função determina se o middleware deve ser executado
-      // Retornando true, permitimos que nossa lógica personalizada seja executada
-      authorized() {
+      authorized({ token }) {
+        // Se não há token, permitir que o middleware execute para redirecionar
+        if (!token) return true
+        
+        // Se token expirou, retornar false para que NextAuth trate como não autorizado
+        if (isTokenExpired(token)) {
+          return false
+        }
+        
         return true
       },
     },

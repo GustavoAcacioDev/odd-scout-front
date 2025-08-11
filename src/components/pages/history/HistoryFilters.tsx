@@ -1,33 +1,34 @@
-"use client";
+'use client'
 
-import React from "react";
-import { Button } from "@/components/ui/shadcn/button";
-import { Input } from "@/components/ui/shadcn/input";
-import { Label } from "@/components/ui/shadcn/label";
-import TableFilterSelect from "@/components/ui/table/TableFilterSelect";
-import { useTableContext } from "@/contexts/TableContext";
-import { RotateCcw, Download } from "lucide-react";
-import { TSelectOptions } from "@/components/ui/select/SelectUncontrolled";
+import { Download, RotateCcw } from 'lucide-react'
+import React from 'react'
+
+import { TSelectOptions } from '@/components/ui/select/SelectUncontrolled'
+import { Button } from '@/components/ui/shadcn/button'
+import { Input } from '@/components/ui/shadcn/input'
+import { Label } from '@/components/ui/shadcn/label'
+import TableFilterSelect from '@/components/ui/table/TableFilterSelect'
+import { useTableContext } from '@/contexts/TableContext'
 
 const statusOptions: TSelectOptions[] = [
-  { value: "all", content: "All Status" },
-  { value: "open", content: "Open" },
-  { value: "won", content: "Won" },
-  { value: "lost", content: "Lost" },
-  { value: "void", content: "Void" },
-  { value: "cashed out", content: "Cashed Out" },
-];
+  { value: 'all', content: 'All Status' },
+  { value: 'open', content: 'Open' },
+  { value: 'won', content: 'Won' },
+  { value: 'lost', content: 'Lost' },
+  { value: 'void', content: 'Void' },
+  { value: 'cashed out', content: 'Cashed Out' },
+]
 
 const marketTypeOptions: TSelectOptions[] = [
-  { value: "all", content: "All Markets" },
-  { value: "winner", content: "Match Winner" },
-  { value: "over_under", content: "Over/Under" },
-  { value: "both_teams_score", content: "Both Teams to Score" },
-];
+  { value: 'all', content: 'All Markets' },
+  { value: 'winner', content: 'Match Winner' },
+  { value: 'over_under', content: 'Over/Under' },
+  { value: 'both_teams_score', content: 'Both Teams to Score' },
+]
 
 interface HistoryFiltersProps {
-  onExport: () => void;
-  isExporting: boolean;
+  onExport: () => void
+  isExporting: boolean
 }
 
 export default function HistoryFilters({
@@ -35,15 +36,15 @@ export default function HistoryFilters({
   isExporting,
 }: HistoryFiltersProps) {
   const { searchInput, handleSetSearchInput, handleClearSearchInput } =
-    useTableContext();
+    useTableContext()
 
   const handleDateChange = (field: string, value: string) => {
-    handleSetSearchInput(field, value);
-  };
+    handleSetSearchInput(field, value)
+  }
 
   const handleClearFilters = () => {
-    handleClearSearchInput();
-  };
+    handleClearSearchInput()
+  }
 
   return (
     <div className="mb-6 space-y-4 rounded-lg border bg-white p-4">
@@ -67,7 +68,7 @@ export default function HistoryFilters({
             className="flex items-center gap-2"
           >
             <Download className="h-4 w-4" />
-            {isExporting ? "Exporting..." : "Export CSV"}
+            {isExporting ? 'Exporting...' : 'Export CSV'}
           </Button>
         </div>
       </div>
@@ -102,8 +103,8 @@ export default function HistoryFilters({
             type="date"
             id="fromDate"
             name="fromDate"
-            value={searchInput.fromDate || ""}
-            onChange={(e) => handleDateChange("fromDate", e.target.value)}
+            value={searchInput.fromDate || ''}
+            onChange={(e) => handleDateChange('fromDate', e.target.value)}
           />
         </div>
 
@@ -114,11 +115,11 @@ export default function HistoryFilters({
             type="date"
             id="toDate"
             name="toDate"
-            value={searchInput.toDate || ""}
-            onChange={(e) => handleDateChange("toDate", e.target.value)}
+            value={searchInput.toDate || ''}
+            onChange={(e) => handleDateChange('toDate', e.target.value)}
           />
         </div>
       </div>
     </div>
-  );
+  )
 }

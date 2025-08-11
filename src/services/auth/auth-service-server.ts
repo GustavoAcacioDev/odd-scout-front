@@ -1,18 +1,18 @@
-import { fetchAnonServer } from "@/lib/fetchWrapperServer/fetch-anon-server";
-import { TLoginUserBody, TLoginUserResponse } from "@/types/auth";
+import { fetchAnonServer } from '@/lib/fetchWrapperServer/fetch-anon-server'
+import { TLoginUserBody, TLoginUserResponse } from '@/types/auth'
 
-import { ApiResponse } from "../../../global";
+import { ApiResponse } from '../../../global'
 
 export async function loginUserServer(data: TLoginUserBody) {
-  const fetch = fetchAnonServer();
-  console.log("teste estou aqui");
-  
+  const fetch = fetchAnonServer()
+  console.log('teste estou aqui')
+
   const res = await fetch.post<TLoginUserBody, ApiResponse<TLoginUserResponse>>(
-    "/auth/signin",
+    '/auth/signin',
     data,
-  );
+  )
 
-  console.log(`service`, res);
+  console.log(`service`, res)
 
-  return res;
+  return res
 }

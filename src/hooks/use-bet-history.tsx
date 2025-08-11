@@ -1,46 +1,47 @@
-import { useState, useEffect, useMemo } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { useTableContext } from "@/contexts/TableContext";
-import {
-  getBetHistory,
-  BetHistoryItem,
-  BetHistoryFilters,
-} from "@/services/bets/bet-service-client";
+import { useQuery } from '@tanstack/react-query'
+import { useEffect, useMemo, useState } from 'react'
 
-const ITEMS_PER_PAGE = 20;
+import { useTableContext } from '@/contexts/TableContext'
+import {
+  BetHistoryFilters,
+  BetHistoryItem,
+  getBetHistory,
+} from '@/services/bets/bet-service-client'
+
+const ITEMS_PER_PAGE = 20
 
 export function useBetHistory() {
-  const { currentPage, searchInput, handleSetTotalItems } = useTableContext();
+  const { currentPage, searchInput, handleSetTotalItems } = useTableContext()
 
   const filters: BetHistoryFilters = useMemo(() => {
     const queryFilters: BetHistoryFilters = {
       pageNumber: currentPage,
       pageSize: ITEMS_PER_PAGE,
-    };
+    }
 
     // Add filters from search input
-    if (searchInput.status && searchInput.status !== "all") {
-      queryFilters.status = searchInput.status;
+    if (searchInput.status && searchInput.status !== 'all') {
+      queryFilters.status = searchInput.status
     }
 
     if (searchInput.fromDate) {
-      queryFilters.fromDate = searchInput.fromDate;
+      queryFilters.fromDate = searchInput.fromDate
     }
 
     if (searchInput.toDate) {
-      queryFilters.toDate = searchInput.toDate;
+      queryFilters.toDate = searchInput.toDate
     }
 
-    if (searchInput.marketType && searchInput.marketType !== "all") {
-      queryFilters.marketType = searchInput.marketType;
+    if (searchInput.marketType && searchInput.marketType !== 'all') {
+      queryFilters.marketType = searchInput.marketType
     }
 
-    return queryFilters;
-  }, [currentPage, searchInput]);
+    return queryFilters
+  }, [currentPage, searchInput])
 
   const queryKey = useMemo(
     () => [
-      "get-bet-history",
+      'get-bet-history',
       filters.pageNumber,
       filters.pageSize,
       filters.status,
@@ -49,19 +50,19 @@ export function useBetHistory() {
       filters.marketType,
     ],
     [filters],
-  );
+  )
 
   const { data, isLoading, error, refetch } = useQuery({
     queryKey,
     queryFn: () => getBetHistory(filters),
     staleTime: 30000, // 30 seconds
-  });
+  })
 
   useEffect(() => {
     if (data?.items !== undefined) {
-      handleSetTotalItems(data.items.length);
+      handleSetTotalItems(data.items.length)
     }
-  }, [data?.items, handleSetTotalItems]);
+  }, [data?.items, handleSetTotalItems])
 
   return {
     items: data?.items || [],
@@ -71,5 +72,5 @@ export function useBetHistory() {
     isLoading,
     error,
     refetch,
-  };
+  }
 }

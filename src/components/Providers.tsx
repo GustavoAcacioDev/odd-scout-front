@@ -1,12 +1,12 @@
 'use client'
-import React from "react";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { SessionProvider } from 'next-auth/react'
+import React from 'react'
 
-import { LoadingProvider } from "@/contexts/LoadingContext";
-import { ResponseDialogProvider } from "@/contexts/ResponseDialogContext";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { SessionProvider } from "next-auth/react";
+import { LoadingProvider } from '@/contexts/LoadingContext'
+import { ResponseDialogProvider } from '@/contexts/ResponseDialogContext'
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient()
 
 function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -17,7 +17,7 @@ function Providers({ children }: { children: React.ReactNode }) {
         </QueryClientProvider>
       </SessionProvider>
     </LoadingProvider>
-  );
+  )
 }
 
-export default Providers;
+export default Providers

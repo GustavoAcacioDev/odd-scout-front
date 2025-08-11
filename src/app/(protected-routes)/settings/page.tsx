@@ -1,24 +1,25 @@
-import PageContainer from "@/components/layout/PageContainer";
-import ProfileForm from "@/components/pages/settings/ProfileForm";
-import SecurityForm from "@/components/pages/settings/SecurityForm";
-import { Button } from "@/components/ui/shadcn/button";
+import React from 'react'
+
+import PageContainer from '@/components/layout/PageContainer'
+import ProfileForm from '@/components/pages/settings/ProfileForm'
+import SecurityForm from '@/components/pages/settings/SecurityForm'
+import { Button } from '@/components/ui/shadcn/button'
 import {
   Card,
+  CardContent,
   CardHeader,
   CardTitle,
-  CardContent,
-} from "@/components/ui/shadcn/card";
-import { Input } from "@/components/ui/shadcn/input";
-import { Label } from "@/components/ui/shadcn/label";
+} from '@/components/ui/shadcn/card'
+import { Input } from '@/components/ui/shadcn/input'
+import { Label } from '@/components/ui/shadcn/label'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/shadcn/select";
-import { Switch } from "@/components/ui/shadcn/switch";
-import React from "react";
+} from '@/components/ui/shadcn/select'
+import { Switch } from '@/components/ui/shadcn/switch'
 
 export default function SettingsPage() {
   return (
@@ -139,5 +140,5 @@ export default function SettingsPage() {
         </Card>
       </div>
     </PageContainer>
-  );
+  )
 }

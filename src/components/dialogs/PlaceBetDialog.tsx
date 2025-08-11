@@ -1,90 +1,86 @@
-"use client";
+'use client'
 
-import React, { useState, useMemo } from "react";
+import { AlertCircle, Calculator, ExternalLink, TrendingUp } from 'lucide-react'
+import React, { useMemo, useState } from 'react'
+
+import { Button } from '@/components/ui/shadcn/button'
 import {
   Dialog,
   DialogContent,
-  DialogHeader,
-  DialogTitle,
   DialogDescription,
   DialogFooter,
+  DialogHeader,
+  DialogTitle,
   DialogTrigger,
-} from "@/components/ui/shadcn/dialog";
-import { Button } from "@/components/ui/shadcn/button";
-import { Input } from "@/components/ui/shadcn/input";
-import { Label } from "@/components/ui/shadcn/label";
-import { TAvaliableBets } from "@/services/bets/bet-service-client";
-import { renderBestOutcome } from "@/utils/bet-utils";
-import {
-  ExternalLink,
-  TrendingUp,
-  Calculator,
-  AlertCircle,
-} from "lucide-react";
-import { formatCurrency } from "@/utils/format";
-import { usePlaceBet } from "@/hooks/use-place-bet";
+} from '@/components/ui/shadcn/dialog'
+import { Input } from '@/components/ui/shadcn/input'
+import { Label } from '@/components/ui/shadcn/label'
+import { usePlaceBet } from '@/hooks/use-place-bet'
+import { TAvaliableBets } from '@/services/bets/bet-service-client'
+import { renderBestOutcome } from '@/utils/bet-utils'
+import { formatCurrency } from '@/utils/format'
 
 interface PlaceBetDialogProps {
-  betData: TAvaliableBets;
+  betData: TAvaliableBets
 }
 
 export default function PlaceBetDialog({ betData }: PlaceBetDialogProps) {
-  const [open, setOpen] = useState(false);
-  const [betAmount, setBetAmount] = useState<string>("");
-  const { mutate: placeBet, isPending } = usePlaceBet();
+  const [open, setOpen] = useState(false)
+  const [betAmount, setBetAmount] = useState<string>('')
+  const { mutate: placeBet, isPending } = usePlaceBet()
 
   const recommendedBet = useMemo(() => {
-    const b = betData.betbyOdd - 1;
-    const p = betData.impliedProbability;
-    const q = 1 - p;
+    const b = betData.betbyOdd - 1
+    const p = betData.impliedProbability
+    const q = 1 - p
 
-    const kellyFraction = (b * p - q) / b;
+    const kellyFraction = (b * p - q) / b
 
-    const conservativeKelly = Math.min(kellyFraction, 0.25);
+    const conservativeKelly = Math.min(kellyFraction, 0.25)
 
-    const defaultBankroll = 1000;
-    const recommendedAmount = defaultBankroll * conservativeKelly;
+    const defaultBankroll = 1000
+    const recommendedAmount = defaultBankroll * conservativeKelly
 
-    return recommendedAmount;
-  }, [betData]);
+    return recommendedAmount
+  }, [betData])
 
   const potentialReturn = useMemo(() => {
-    const amount = parseFloat(betAmount) || 0;
-    return amount * betData.betbyOdd;
-  }, [betAmount, betData.betbyOdd]);
+    const amount = parseFloat(betAmount) || 0
+    return amount * betData.betbyOdd
+  }, [betAmount, betData.betbyOdd])
 
   const potentialProfit = useMemo(() => {
-    const amount = parseFloat(betAmount) || 0;
-    return potentialReturn - amount;
-  }, [potentialReturn, betAmount]);
+    const amount = parseFloat(betAmount) || 0
+    return potentialReturn - amount
+  }, [potentialReturn, betAmount])
 
   const handlePlaceBet = () => {
-    const amount = parseFloat(betAmount);
-    if (amount <= 0) return;
+    const amount = parseFloat(betAmount)
+    if (amount <= 0) return
 
     placeBet(
       {
         valueBetId: betData.id,
-        amount: amount,
+        amount,
       },
       {
         onSuccess: () => {
-          setOpen(false);
-          setBetAmount("");
+          setOpen(false)
+          setBetAmount('')
         },
       },
-    );
-  };
+    )
+  }
 
   const handleOpenBetPage = () => {
     window.open(
-      process.env.NEXT_PUBLIC__BET_HOUSE_URL + betData.link,
-      "_blank",
-      "noopener,noreferrer",
-    );
-  };
+      process.env.NEXT_PUBLIC_BET_HOUSE_URL + betData.link,
+      '_blank',
+      'noopener,noreferrer',
+    )
+  }
 
-  const isValidAmount = parseFloat(betAmount) > 0;
+  const isValidAmount = parseFloat(betAmount) > 0
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -243,10 +239,10 @@ export default function PlaceBetDialog({ betData }: PlaceBetDialogProps) {
             onClick={handlePlaceBet}
             disabled={!isValidAmount || isPending}
           >
-            {isPending ? "Processando..." : "Confirmar Aposta"}
+            {isPending ? 'Processando...' : 'Confirmar Aposta'}
           </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  );
+  )
 }

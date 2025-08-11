@@ -1,28 +1,29 @@
-"use client";
+'use client'
 
-import InputDefault from "@/components/ui/input/InputDefault";
-import { Button } from "@/components/ui/shadcn/button";
+import { Label } from '@radix-ui/react-label'
+import React from 'react'
+import { useForm } from 'react-hook-form'
+
+import InputDefault from '@/components/ui/input/InputDefault'
+import { Button } from '@/components/ui/shadcn/button'
 import {
   Card,
+  CardContent,
   CardHeader,
   CardTitle,
-  CardContent,
-} from "@/components/ui/shadcn/card";
-import { Form } from "@/components/ui/shadcn/form";
-import { Input } from "@/components/ui/shadcn/input";
-import { Label } from "@radix-ui/react-label";
-import React from "react";
-import { useForm } from "react-hook-form";
+} from '@/components/ui/shadcn/card'
+import { Form } from '@/components/ui/shadcn/form'
+import { Input } from '@/components/ui/shadcn/input'
 
 export default function ProfileForm() {
   const form = useForm({
     defaultValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
     },
-  });
+  })
 
   return (
     <Card className="h-auto">
@@ -41,5 +42,5 @@ export default function ProfileForm() {
         </Form>
       </CardContent>
     </Card>
-  );
+  )
 }

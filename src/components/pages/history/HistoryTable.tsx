@@ -1,55 +1,57 @@
-"use client";
-import React, { useState } from "react";
+'use client'
+import React, { useState } from 'react'
+
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-} from "@/components/ui/shadcn/card";
-import TableContainer from "@/components/ui/table/TableContainer";
-import TableData from "@/components/ui/table/TableData";
-import useCustomToast from "@/hooks/use-custom-toast";
-import HistoryFilters from "./HistoryFilters";
-import { useBetHistory } from "@/hooks/use-bet-history";
-import { betHistoryColumns } from "@/table-config/bet-history-columns";
+} from '@/components/ui/shadcn/card'
+import TableContainer from '@/components/ui/table/TableContainer'
+import TableData from '@/components/ui/table/TableData'
+import { useBetHistory } from '@/hooks/use-bet-history'
+import useCustomToast from '@/hooks/use-custom-toast'
+import { betHistoryColumns } from '@/table-config/bet-history-columns'
+
+import HistoryFilters from './HistoryFilters'
 
 function HistoryTable() {
-  const [isExporting, setIsExporting] = useState(false);
-  const { successToast, errorToast } = useCustomToast();
+  const [isExporting, setIsExporting] = useState(false)
+  const { successToast, errorToast } = useCustomToast()
 
   const {
     items: historyList,
     isLoading: isLoadingHistory,
     totalCount,
-  } = useBetHistory();
+  } = useBetHistory()
 
   const handleExportCSV = async () => {
-    setIsExporting(true);
+    setIsExporting(true)
 
     try {
       const headers = [
-        "Date",
-        "Time",
-        "Event",
-        "League",
-        "Bet",
-        "Market Type",
-        "Stake",
-        "Odds",
-        "Potential Payout",
-        "Profit/Loss",
-        "Status",
-      ];
+        'Date',
+        'Time',
+        'Event',
+        'League',
+        'Bet',
+        'Market Type',
+        'Stake',
+        'Odds',
+        'Potential Payout',
+        'Profit/Loss',
+        'Status',
+      ]
 
       const csvContent = [
-        headers.join(","),
+        headers.join(','),
         ...historyList.map((bet) => {
-          const date = new Date(bet.placedAt);
+          const date = new Date(bet.placedAt)
           return [
-            date.toLocaleDateString("pt-BR"),
-            date.toLocaleTimeString("pt-BR", {
-              hour: "2-digit",
-              minute: "2-digit",
+            date.toLocaleDateString('pt-BR'),
+            date.toLocaleTimeString('pt-BR', {
+              hour: '2-digit',
+              minute: '2-digit',
             }),
             `"${bet.team1} vs ${bet.team2}"`,
             `"${bet.league}"`,
@@ -60,37 +62,37 @@ function HistoryTable() {
             bet.potentialReturn.toFixed(2),
             bet.profit.toFixed(2),
             `"${bet.statusDescription}"`,
-          ].join(",");
+          ].join(',')
         }),
-      ].join("\n");
+      ].join('\n')
 
-      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-      const link = document.createElement("a");
-      const url = URL.createObjectURL(blob);
-      link.setAttribute("href", url);
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' })
+      const link = document.createElement('a')
+      const url = URL.createObjectURL(blob)
+      link.setAttribute('href', url)
       link.setAttribute(
-        "download",
-        `bet-history-${new Date().toISOString().split("T")[0]}.csv`,
-      );
-      link.style.visibility = "hidden";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+        'download',
+        `bet-history-${new Date().toISOString().split('T')[0]}.csv`,
+      )
+      link.style.visibility = 'hidden'
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
 
       successToast(
-        "Export Successful",
+        'Export Successful',
         `${historyList.length} bet records exported to CSV.`,
-      );
+      )
     } catch (error) {
-      console.error("Error exporting CSV:", error);
+      console.error('Error exporting CSV:', error)
       errorToast(
-        "Export Failed",
-        "There was an error exporting your bet history. Please try again.",
-      );
+        'Export Failed',
+        'There was an error exporting your bet history. Please try again.',
+      )
     } finally {
-      setIsExporting(false);
+      setIsExporting(false)
     }
-  };
+  }
 
   return (
     <div className="space-y-6">
@@ -101,7 +103,7 @@ function HistoryTable() {
           <div className="flex items-center justify-between">
             <CardTitle className="text-2xl">Bet History</CardTitle>
             <div className="text-sm text-gray-600">
-              {totalCount} total bet{totalCount !== 1 ? "s" : ""}
+              {totalCount} total bet{totalCount !== 1 ? 's' : ''}
             </div>
           </div>
         </CardHeader>
@@ -126,7 +128,7 @@ function HistoryTable() {
         </CardContent>
       </Card>
     </div>
-  );
+  )
 }
 
-export default HistoryTable;
+export default HistoryTable

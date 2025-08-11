@@ -1,5 +1,6 @@
-import { fetchAuthClient } from "@/lib/fetchWrapperClient/fetch-auth-client";
-import { ApiResponse } from "../../../global";
+import { fetchAuthClient } from '@/lib/fetchWrapperClient/fetch-auth-client'
+
+import { ApiResponse } from '../../../global'
 
 export type DashboardMetric = {
   title: string
@@ -8,20 +9,19 @@ export type DashboardMetric = {
   changeValue?: number | null
   changeUnit: 'percentage' | 'percentage_points' | 'absolute' | 'text'
   changeText: string
-};
+}
 
 export type TDashboardCardsValue = {
-  total: DashboardMetric;
-  winRate: DashboardMetric;
-  profit: DashboardMetric;
-  active: DashboardMetric;
-};
+  total: DashboardMetric
+  winRate: DashboardMetric
+  profit: DashboardMetric
+  active: DashboardMetric
+}
 
 export default function getDashboardCards() {
-  const fetch = fetchAuthClient();
+  const fetch = fetchAuthClient()
 
-  const res =
-    fetch.get<ApiResponse<TDashboardCardsValue>>("/dashboard/metrics");
+  const res = fetch.get<ApiResponse<TDashboardCardsValue>>('/dashboard/metrics')
 
-  return res;
+  return res
 }

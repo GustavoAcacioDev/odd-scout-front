@@ -1,32 +1,33 @@
-"use client";
+'use client'
 
-import { ColumnDef } from "@tanstack/react-table";
-import { useState } from "react";
-import { TAvaliableBets } from "@/services/bets/bet-service-client";
-import { Button } from "@/components/ui/shadcn/button";
-import { renderBestOutcome } from "@/utils/bet-utils";
-import PlaceBetDialog from "@/components/dialogs/PlaceBetDialog";
-import { formatOdds, formatPercentage } from "@/utils/format";
+import { ColumnDef } from '@tanstack/react-table'
+import { useState } from 'react'
+
+import PlaceBetDialog from '@/components/dialogs/PlaceBetDialog'
+import { Button } from '@/components/ui/shadcn/button'
+import { TAvaliableBets } from '@/services/bets/bet-service-client'
+import { renderBestOutcome } from '@/utils/bet-utils'
+import { formatOdds, formatPercentage } from '@/utils/format'
 
 export const availableBetsColumns: ColumnDef<TAvaliableBets>[] = [
   {
-    accessorKey: "expectedValue",
-    header: "EV",
+    accessorKey: 'expectedValue',
+    header: 'EV',
     cell: (info) => {
-      const value = info.getValue() as number;
+      const value = info.getValue() as number
       return (
         <span className="font-semibold text-green-600">
           {formatPercentage(value)}
         </span>
-      );
+      )
     },
     size: 5,
     minSize: 5,
     maxSize: 5,
   },
   {
-    accessorKey: "team1",
-    header: "Event",
+    accessorKey: 'team1',
+    header: 'Event',
     cell: (info) => (
       <div>
         <div className="font-medium">
@@ -40,8 +41,8 @@ export const availableBetsColumns: ColumnDef<TAvaliableBets>[] = [
     maxSize: 30,
   },
   {
-    accessorKey: "bestOutcome",
-    header: "Recommended Bet",
+    accessorKey: 'bestOutcome',
+    header: 'Recommended Bet',
     cell: (info) => (
       <span className="font-medium">
         {renderBestOutcome(info.getValue() as 1 | 2 | 3)}
@@ -52,8 +53,8 @@ export const availableBetsColumns: ColumnDef<TAvaliableBets>[] = [
     maxSize: 20,
   },
   {
-    accessorKey: "betbyOdd",
-    header: "Betby Odds",
+    accessorKey: 'betbyOdd',
+    header: 'Betby Odds',
     cell: (info) => (
       <span className="font-semibold text-green-600">
         {formatOdds(info.getValue() as number)}
@@ -64,19 +65,19 @@ export const availableBetsColumns: ColumnDef<TAvaliableBets>[] = [
     maxSize: 10,
   },
   {
-    accessorKey: "pinnacleOdd",
-    header: "Pinnacle Odds",
+    accessorKey: 'pinnacleOdd',
+    header: 'Pinnacle Odds',
     cell: (info) => formatOdds(info.getValue() as number),
     size: 10,
     minSize: 10,
     maxSize: 10,
   },
   {
-    accessorKey: "id",
-    header: "Ações",
+    accessorKey: 'id',
+    header: 'Ações',
     cell: (info) => <PlaceBetDialog betData={info.row.original} />,
     size: 5,
     minSize: 5,
     maxSize: 5,
   },
-];
+]

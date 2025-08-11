@@ -1,36 +1,37 @@
-"use client";
+'use client'
 
-import React from "react";
+import { useQuery } from '@tanstack/react-query'
 import {
   Activity,
   DollarSign,
+  LucideIcon,
   Target,
   TrendingUp,
-  LucideIcon,
-} from "lucide-react";
-import InformationCard from "@/components/pages/dashboard/InformationCard";
+} from 'lucide-react'
+import React from 'react'
+
+import InformationCard from '@/components/pages/dashboard/InformationCard'
 import getDashboardCards, {
   DashboardMetric,
-} from "@/services/dashboard/dashboard-service-client";
-import { useQuery } from "@tanstack/react-query";
-import { processMetric } from "@/utils/format";
+} from '@/services/dashboard/dashboard-service-client'
+import { processMetric } from '@/utils/format'
 
 // Mapping de títulos para ícones
 const getIconByTitle = (title: string): LucideIcon => {
   const iconMap: Record<string, LucideIcon> = {
-    "Total Bets": Target,
-    "Win Rate": TrendingUp,
-    "Total Profit": DollarSign,
-    "Active Bets": Activity,
-  };
+    'Total Bets': Target,
+    'Win Rate': TrendingUp,
+    'Total Profit': DollarSign,
+    'Active Bets': Activity,
+  }
 
-  return iconMap[title] || Target;
-};
+  return iconMap[title] || Target
+}
 
 // Componente para renderizar um card individual
 const MetricCard: React.FC<{ metric: DashboardMetric }> = ({ metric }) => {
-  const Icon = getIconByTitle(metric.title);
-  const processed = processMetric(metric);
+  const Icon = getIconByTitle(metric.title)
+  const processed = processMetric(metric)
 
   return (
     <InformationCard
@@ -47,13 +48,13 @@ const MetricCard: React.FC<{ metric: DashboardMetric }> = ({ metric }) => {
         </>
       }
     />
-  );
-};
+  )
+}
 
 // Loading skeleton
 const LoadingSkeleton: React.FC = () => (
   <div className="bg-muted h-32 animate-pulse rounded-lg" />
-);
+)
 
 // Error state
 const ErrorState: React.FC<{ error: Error }> = ({ error }) => (
@@ -62,7 +63,7 @@ const ErrorState: React.FC<{ error: Error }> = ({ error }) => (
       Error loading dashboard data: {error.message}
     </p>
   </div>
-);
+)
 
 // No data state
 const NoDataState: React.FC = () => (
@@ -71,15 +72,15 @@ const NoDataState: React.FC = () => (
       No dashboard data available.
     </p>
   </div>
-);
+)
 
 function DashboardCards() {
   const { data, isLoading, error } = useQuery({
-    queryKey: ["get-dashboard-cards"],
+    queryKey: ['get-dashboard-cards'],
     queryFn: () => getDashboardCards(),
     refetchInterval: 30000, // Refresh every 30 seconds
     staleTime: 20000, // Consider data stale after 20 seconds
-  });
+  })
 
   // Loading state
   if (isLoading) {
@@ -89,17 +90,17 @@ function DashboardCards() {
           <LoadingSkeleton key={index} />
         ))}
       </div>
-    );
+    )
   }
 
   // Error state
   if (error) {
-    return <ErrorState error={error as Error} />;
+    return <ErrorState error={error as Error} />
   }
 
   // No data state
   if (!data) {
-    return <NoDataState />;
+    return <NoDataState />
   }
 
   // Convert data object to array for mapping
@@ -108,7 +109,7 @@ function DashboardCards() {
     data.value.winRate,
     data.value.profit,
     data.value.active,
-  ];
+  ]
 
   return (
     <div className="mb-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
@@ -116,7 +117,7 @@ function DashboardCards() {
         <MetricCard key={metric.title} metric={metric} />
       ))}
     </div>
-  );
+  )
 }
 
-export default DashboardCards;
+export default DashboardCards

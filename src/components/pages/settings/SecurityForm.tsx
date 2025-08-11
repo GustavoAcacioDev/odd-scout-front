@@ -1,21 +1,22 @@
-"use client";
-import InputPassword from "@/components/ui/input/InputPassword";
-import { Button } from "@/components/ui/shadcn/button";
+'use client'
+import React from 'react'
+import { useForm } from 'react-hook-form'
+import z from 'zod'
+
+import InputPassword from '@/components/ui/input/InputPassword'
+import { Button } from '@/components/ui/shadcn/button'
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-} from "@/components/ui/shadcn/card";
-import { Form } from "@/components/ui/shadcn/form";
-import { validationText } from "@/config/validation-text";
-import { useFormSubmitHandler } from "@/hooks/use-form-submit-handler";
-import { changePassword } from "@/services/settings/settings-service-client";
-import React from "react";
-import { useForm } from "react-hook-form";
-import z from "zod";
+} from '@/components/ui/shadcn/card'
+import { Form } from '@/components/ui/shadcn/form'
+import { validationText } from '@/config/validation-text'
+import { useFormSubmitHandler } from '@/hooks/use-form-submit-handler'
+import { changePassword } from '@/services/settings/settings-service-client'
 
-const { requiredError, maxCharacters, minValue } = validationText.zod;
+const { requiredError, maxCharacters, minValue } = validationText.zod
 
 const securitySchema = z
   .object({
@@ -34,23 +35,23 @@ const securitySchema = z
   })
   .refine((data) => data.newPassword === data.confirmPassword, {
     message: "The password don't match.",
-    path: ["newPassword"],
-  });
+    path: ['newPassword'],
+  })
 
-type TSecuritySchema = z.infer<typeof securitySchema>;
+type TSecuritySchema = z.infer<typeof securitySchema>
 
 export default function SecurityForm() {
-  const { onSubmitHandler } = useFormSubmitHandler();
+  const { onSubmitHandler } = useFormSubmitHandler()
 
   const form = useForm<TSecuritySchema>({
     defaultValues: {
-      currentPassword: "",
-      newPassword: "",
-      confirmPassword: "",
+      currentPassword: '',
+      newPassword: '',
+      confirmPassword: '',
     },
-  });
+  })
 
-  const { handleSubmit } = form;
+  const { handleSubmit } = form
 
   async function onSubmit(data: TSecuritySchema) {
     await onSubmitHandler({
@@ -58,20 +59,20 @@ export default function SecurityForm() {
       service: changePassword,
       options: {
         onSuccessMessage: {
-          title: "Senha alterada!",
-          message: "Sua senha foi alterada com sucesso.",
+          title: 'Senha alterada!',
+          message: 'Sua senha foi alterada com sucesso.',
         },
         onCatchMessage: {
           logService: {
-            block: "Catch of onSubmit",
-            component: "SecurityForm",
+            block: 'Catch of onSubmit',
+            component: 'SecurityForm',
           },
           log: {
-            path: "settings > security form > onSubmit",
+            path: 'settings > security form > onSubmit',
           },
         },
       },
-    });
+    })
   }
 
   return (
@@ -103,5 +104,5 @@ export default function SecurityForm() {
         </Form>
       </CardContent>
     </Card>
-  );
+  )
 }
